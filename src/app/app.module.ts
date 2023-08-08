@@ -1,16 +1,25 @@
 import { NgModule } from '@angular/core';
+import { NgxsModule } from '@ngxs/store';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TodosComponent } from './todos/todos.component';
+import { TodoState } from './store/todo.state';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TodosComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    NgxsModule.forRoot([TodoState]),
+    ButtonsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
