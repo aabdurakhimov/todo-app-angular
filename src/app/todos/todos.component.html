@@ -1,1 +1,6 @@
-<p>todos works!</p>
+<ul>
+  Todos
+  <li *ngFor="let todo of todos$ | async">
+    {{ todo.title }}
+  </li>
+</ul>
