@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { TodoState } from './store/todo.state';
-import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TodosModule } from './todos/todos.module';
 
@@ -13,7 +12,6 @@ import { TodosModule } from './todos/todos.module';
   imports: [
     BrowserModule,
     NgxsModule.forRoot([TodoState]),
-    ButtonsModule,
     BrowserAnimationsModule,
     TodosModule,
   ],

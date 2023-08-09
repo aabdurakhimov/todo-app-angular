@@ -1,0 +1,30 @@
+<form [formGroup]="todoForm">
+  <kendo-formfield>
+    <kendo-label [for]="title" text="Todo title"></kendo-label>
+    <input formControlName="title" #title kendoTextBox required />
+
+    <kendo-formerror>Error: Title is required</kendo-formerror>
+  </kendo-formfield>
+
+  <kendo-dropdownlist
+    [data]="todoTypes"
+    formControlName="type"
+  ></kendo-dropdownlist>
+
+  <kendo-textarea
+    placeholder="Description"
+    [rows]="4"
+    resizable="vertical"
+  ></kendo-textarea>
+
+  <button
+    kendoButton
+    (click)="onSave()"
+    themeColor="primary"
+    [disabled]="!todoForm.valid"
+    type="submit"
+  >
+    Save
+  </button>
+  <button kendoButton (click)="onCancel()" type="button">Cancel</button>
+</form>
