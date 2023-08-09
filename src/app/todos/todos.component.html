@@ -3,15 +3,12 @@
   Add Todo
 </button>
 
-<kendo-dialog title="Please confirm" *ngIf="isOpen" (close)="close()">
-  <add-edit-todo-form
-    (save)="addTodo($event)"
-    (cancel)="close()"
-  ></add-edit-todo-form>
-</kendo-dialog>
-<ul>
-  Todos
-  <li *ngFor="let todo of todos$ | async">
-    {{ todo.title }}
-  </li>
-</ul>
+<add-edit-todo-dialog
+  [isOpen]="isTodoDialogOpen"
+  (addTodo)="addTodo($event)"
+  (editTodo)="editTodo($event)"
+  (cancel)="closeTodoDialog()"
+  [value]="editTodo$ | async"
+></add-edit-todo-dialog>
+
+<app-todos-table (edit)="editHandler($event)"></app-todos-table>

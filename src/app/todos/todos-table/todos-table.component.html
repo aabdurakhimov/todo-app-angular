@@ -1,0 +1,29 @@
+<kendo-grid
+  [kendoGridBinding]="(todos$ | async) ?? []"
+  [sortable]="true"
+  [pageable]="true"
+  [pageSize]="10"
+  filterable="menu"
+  (remove)="removeHandler($event)"
+  (edit)="editHandler($event)"
+>
+  <kendo-grid-column field="title" title="Title"></kendo-grid-column>
+  <kendo-grid-column field="description" title="Description">
+  </kendo-grid-column>
+  <kendo-grid-column field="type" title="Type"></kendo-grid-column>
+  <kendo-grid-column field="completed" title="Completed" filter="boolean">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <input
+        type="checkbox"
+        [checked]="dataItem.completed"
+        disabled
+      /> </ng-template
+  ></kendo-grid-column>
+
+  <kendo-grid-command-column title="Actions" [width]="220">
+    <ng-template kendoGridCellTemplate let-isNew="isNew">
+      <button kendoGridEditCommand [primary]="true">Edit</button>
+      <button kendoGridRemoveCommand>Remove</button>
+    </ng-template>
+  </kendo-grid-command-column>
+</kendo-grid>

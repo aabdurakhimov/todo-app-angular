@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { GridModule } from '@progress/kendo-angular-grid';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 
@@ -14,6 +15,7 @@ import { LabelModule } from '@progress/kendo-angular-label';
     InputsModule,
     LabelModule,
     DropDownsModule,
+    GridModule,
   ],
 })
 export class KendoModule {}
