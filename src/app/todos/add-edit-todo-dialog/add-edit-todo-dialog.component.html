@@ -1,17 +1,22 @@
-<kendo-dialog *ngIf="isOpen" (close)="onCancel()">
+<kendo-dialog
+  *ngIf="isOpen"
+  (close)="onCancel()"
+  [minWidth]="300"
+  [width]="400"
+>
   <kendo-dialog-titlebar>
     {{ isNew ? "Add new todo" : "Edit todo" }}
   </kendo-dialog-titlebar>
 
-  <form [formGroup]="todoForm">
+  <form [formGroup]="todoForm" class="flex flex-col space-y-5">
     <kendo-formfield>
-      <kendo-label [for]="title" text="Title"></kendo-label>
+      <kendo-label class="label" [for]="title" text="Title"></kendo-label>
       <input formControlName="title" #title kendoTextBox required />
-      <kendo-formerror>Error: Title is required</kendo-formerror>
+      <kendo-formerror>Title is required</kendo-formerror>
     </kendo-formfield>
 
     <kendo-formfield>
-      <kendo-label [for]="type" text="Type"></kendo-label>
+      <kendo-label class="label" [for]="type" text="Type"></kendo-label>
       <kendo-dropdownlist
         formControlName="type"
         [data]="todoTypes"
@@ -20,7 +25,11 @@
     </kendo-formfield>
 
     <kendo-formfield>
-      <kendo-label [for]="description" text="Description"></kendo-label>
+      <kendo-label
+        class="label"
+        [for]="description"
+        text="Description"
+      ></kendo-label>
       <kendo-textarea
         formControlName="description"
         #description
@@ -30,12 +39,17 @@
       ></kendo-textarea>
     </kendo-formfield>
 
-    <kendo-formfield *ngIf="!isNew">
-      <kendo-label [for]="completed" text="Completed"></kendo-label>
+    <kendo-formfield *ngIf="!isNew" class="flex items-center space-x-2">
+      <kendo-label
+        class="text-xl font-medium"
+        [for]="completed"
+        text="Completed"
+      ></kendo-label>
       <input
         formControlName="completed"
         #completed
         kendoCheckBox
+        size="large"
         type="checkbox"
       />
     </kendo-formfield>

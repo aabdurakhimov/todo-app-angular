@@ -45,6 +45,8 @@ export class AddEditTodoDialogComponent {
 
   public onSave(): void {
     const todo = this.todoForm.getRawValue();
+    console.log(this.todoForm);
+
     this.clearForm();
     if (!this.isNew && this.selectedTodo) {
       this.editTodo.emit({

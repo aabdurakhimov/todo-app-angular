@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
+import { SVGIcon, plusIcon } from '@progress/kendo-svg-icons';
 import { nanoid } from 'nanoid';
 import { BehaviorSubject, Observable, first } from 'rxjs';
 import { TodoActions } from '../store/todo.actions';
@@ -15,6 +16,8 @@ import { Todo } from './models/todo.model';
 export class TodosComponent {
   public readonly title = 'Todo List';
   public isTodoDialogOpen = false;
+  public plusSVG: SVGIcon = plusIcon;
+
   private selectedTodoSubject = new BehaviorSubject<Todo | null>(null);
   public selectedTodo$ = this.selectedTodoSubject.asObservable();
 

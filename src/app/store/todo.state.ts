@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { TodoType } from '../todos/models/todo-type.enum';
 import { Todo } from '../todos/models/todo.model';
+import { mockTodos } from '../todos/utils';
 import { TodoActions } from './todo.actions';
 
 export interface TodoStateModel {
@@ -11,15 +11,7 @@ export interface TodoStateModel {
 @State<TodoStateModel>({
   name: 'todo',
   defaults: {
-    todos: [
-      {
-        id: '1',
-        title: 'First todo',
-        description: 'This is the first todo',
-        completed: false,
-        type: TodoType.PERSONAL,
-      },
-    ],
+    todos: mockTodos,
   },
 })
 @Injectable()

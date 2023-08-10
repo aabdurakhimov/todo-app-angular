@@ -1,7 +1,14 @@
-<h1>{{ title }}</h1>
-<button kendoButton (click)="openTodoDialog()" themeColor="primary">
-  Add Todo
-</button>
+<h1 class="text-4xl text-center font-bold">{{ title }}</h1>
+<div class="w-full mb-5">
+  <kendo-floatingactionbutton
+    [svgIcon]="plusSVG"
+    text="Add New"
+    title="Add New"
+    [align]="{ horizontal: 'end', vertical: 'bottom' }"
+    (click)="openTodoDialog()"
+  >
+  </kendo-floatingactionbutton>
+</div>
 
 <add-edit-todo-dialog
   [isOpen]="isTodoDialogOpen"
