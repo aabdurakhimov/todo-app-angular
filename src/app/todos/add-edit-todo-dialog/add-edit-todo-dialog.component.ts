@@ -38,14 +38,13 @@ export class AddEditTodoDialogComponent {
     this.todoForm.reset();
   }
 
-  public onCancel(): void {
+  public handleCancel(): void {
     this.cancel.emit();
     this.clearForm();
   }
 
-  public onSave(): void {
+  public handleSave(): void {
     const todo = this.todoForm.getRawValue();
-    console.log(this.todoForm);
 
     this.clearForm();
     if (!this.isNew && this.selectedTodo) {
