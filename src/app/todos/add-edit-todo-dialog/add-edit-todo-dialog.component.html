@@ -5,23 +5,42 @@
 
   <form [formGroup]="todoForm">
     <kendo-formfield>
-      <kendo-label [for]="title" text="Todo title"></kendo-label>
+      <kendo-label [for]="title" text="Title"></kendo-label>
       <input formControlName="title" #title kendoTextBox required />
 
       <kendo-formerror>Error: Title is required</kendo-formerror>
     </kendo-formfield>
 
-    <kendo-dropdownlist
-      [data]="todoTypes"
-      formControlName="type"
-    ></kendo-dropdownlist>
+    <kendo-formfield>
+      <kendo-label [for]="type" text="Type"></kendo-label>
+      <kendo-dropdownlist
+        formControlName="type"
+        [data]="todoTypes"
+        #type
+      ></kendo-dropdownlist>
+    </kendo-formfield>
 
-    <kendo-textarea
-      placeholder="Description"
-      [rows]="4"
-      resizable="vertical"
-      formControlName="description"
-    ></kendo-textarea>
+    <kendo-formfield>
+      <kendo-label [for]="description" text="Description"></kendo-label>
+      <kendo-textarea
+        formControlName="description"
+        #description
+        placeholder="Description"
+        [rows]="4"
+        resizable="vertical"
+      ></kendo-textarea>
+    </kendo-formfield>
+
+    <kendo-formfield *ngIf="!isNew">
+      <kendo-label [for]="completed" text="Completed"></kendo-label>
+      <input
+        formControlName="completed"
+        #completed
+        kendoCheckBox
+        type="checkbox"
+        [disabled]="isNew"
+      />
+    </kendo-formfield>
 
     <kendo-dialog-actions layout="end">
       <button

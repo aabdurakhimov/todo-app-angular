@@ -8,7 +8,7 @@
   (addTodo)="addTodo($event)"
   (editTodo)="editTodo($event)"
   (cancel)="closeTodoDialog()"
-  [value]="editTodo$ | async"
+  [value]="selectedTodo$ | async"
 ></add-edit-todo-dialog>
 
-<app-todos-table (edit)="editHandler($event)"></app-todos-table>
+<app-todos-table (edit)="handleTableEdit($event)"></app-todos-table>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { nanoid } from 'nanoid';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, first } from 'rxjs';
 import { TodoActions } from '../store/todo.actions';
 import { TodoState } from '../store/todo.state';
 import { TodoFormFields } from './add-edit-todo-dialog/types';
@@ -15,8 +15,8 @@ import { Todo } from './models/todo.model';
 export class TodosComponent {
   public readonly title = 'Todo List';
   public isTodoDialogOpen = false;
-  private editTodoSubject = new BehaviorSubject<Todo | null>(null);
-  public editTodo$ = this.editTodoSubject.asObservable();
+  private selectedTodoSubject = new BehaviorSubject<Todo | null>(null);
+  public selectedTodo$ = this.selectedTodoSubject.asObservable();
 
   @Select(TodoState.todos)
   public todos$!: Observable<Todo[]>;
@@ -32,28 +32,27 @@ export class TodosComponent {
       id: nanoid(),
       ...todo,
     };
+
     this.store
       .dispatch(new TodoActions.Add(newTodo))
+      .pipe(first())
       .subscribe(() => this.closeTodoDialog());
   }
 
   public editTodo(todo: Todo): void {
-    console.log('editTodo', todo);
-
     this.store
       .dispatch(new TodoActions.Edit(todo))
+      .pipe(first())
       .subscribe(() => this.closeTodoDialog());
   }
 
-  public editHandler(todo: Todo): void {
-    console.log('editHandler', todo);
-
-    this.editTodoSubject.next(todo);
+  public handleTableEdit(todo: Todo): void {
+    this.selectedTodoSubject.next(todo);
     this.openTodoDialog();
   }
 
   public closeTodoDialog(): void {
     this.isTodoDialogOpen = false;
-    this.editTodoSubject.next(null);
+    this.selectedTodoSubject.next(null);
   }
 }

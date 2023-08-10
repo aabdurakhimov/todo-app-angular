@@ -13,7 +13,7 @@ export class AddEditTodoDialogComponent {
   @Input() public isOpen = false;
   @Input() public set value(todo: Todo | null) {
     console.log('todo', todo);
-    this._value = todo;
+    this.selectedTodo = todo;
     if (todo) {
       this.isNew = false;
       this.todoForm.patchValue(todo);
@@ -28,7 +28,7 @@ export class AddEditTodoDialogComponent {
 
   public todoTypes = Object.values(TodoType);
   public isNew = true;
-  private _value: Todo | null = null;
+  private selectedTodo: Todo | null = null;
 
   public todoForm = this.fb.group({
     title: ['', Validators.required],
@@ -50,15 +50,13 @@ export class AddEditTodoDialogComponent {
 
   public onSave(): void {
     const todo = this.todoForm.getRawValue();
-    if (this.isNew) {
-      this.addTodo.emit(todo);
-    } else {
-      console.log('value', this.value);
-
+    if (!this.isNew && this.selectedTodo) {
       this.editTodo.emit({
         ...todo,
-        id: this._value?.id ?? '',
+        id: this.selectedTodo.id,
       });
+    } else {
+      this.addTodo.emit(todo);
     }
     this.clearForm();
   }
