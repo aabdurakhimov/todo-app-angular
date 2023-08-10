@@ -7,7 +7,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "skipTests": true
         }
       },
       "root": "",
@@ -30,6 +31,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@progress/kendo-theme-default/dist/all.css",
               "src/styles.scss"
             ],
             "scripts": []

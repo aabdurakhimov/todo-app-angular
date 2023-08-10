@@ -1,0 +1,75 @@
+<kendo-grid
+  [kendoGridBinding]="(todos$ | async) ?? []"
+  [sortable]="true"
+  [pageable]="true"
+  [pageSize]="10"
+  filterable="menu"
+  (cellClick)="handleCellClick($event)"
+  (cellClose)="handleCellClose($event)"
+  (remove)="handleRemove($event)"
+  (edit)="handleEdit($event)"
+>
+  <kendo-grid-column field="title" title="Title"></kendo-grid-column>
+  <kendo-grid-column field="description" title="Description">
+  </kendo-grid-column>
+
+  <kendo-grid-column field="type" title="Type">
+    <ng-template
+      kendoGridEditTemplate
+      let-dataItem="dataItem"
+      let-formGroup="formGroup"
+    >
+      <kendo-dropdownlist
+        [data]="todoTypes"
+        [formControl]="formGroup.get('type')"
+      ></kendo-dropdownlist>
+    </ng-template>
+    <ng-template
+      kendoGridFilterMenuTemplate
+      let-column="column"
+      let-filter="filter"
+      let-filterService="filterService"
+    >
+      <dropdownlist-filter
+        [field]="column.field"
+        [currentFilter]="filter"
+        [filterService]="filterService"
+        [data]="todoTypes"
+      ></dropdownlist-filter>
+    </ng-template>
+  </kendo-grid-column>
+
+  <kendo-grid-column
+    field="completed"
+    title="Status"
+    editor="boolean"
+    filter="boolean"
+  >
+    <ng-template kendoGridCellTemplate let-dataItem>
+      {{ dataItem.completed ? "Completed" : "Not Completed" }}
+    </ng-template>
+
+    <ng-template
+      kendoGridFilterMenuTemplate
+      let-column="column"
+      let-filter="filter"
+      let-filterService="filterService"
+    >
+      <dropdownlist-filter
+        [field]="column.field"
+        [currentFilter]="filter"
+        [filterService]="filterService"
+        [data]="todoStatuses"
+        textField="text"
+        valueField="value"
+      ></dropdownlist-filter>
+    </ng-template>
+  </kendo-grid-column>
+
+  <kendo-grid-command-column title="Actions" [width]="220">
+    <ng-template kendoGridCellTemplate let-isNew="isNew">
+      <button kendoGridEditCommand>Edit</button>
+      <button kendoGridRemoveCommand [primary]="true">Remove</button>
+    </ng-template>
+  </kendo-grid-command-column>
+</kendo-grid>

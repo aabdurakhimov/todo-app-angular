@@ -1,0 +1,21 @@
+<h1 class="text-4xl text-center font-bold">{{ title }}</h1>
+<div class="w-full mb-5">
+  <kendo-floatingactionbutton
+    [svgIcon]="plusSVG"
+    text="Add New"
+    title="Add New"
+    [align]="{ horizontal: 'end', vertical: 'bottom' }"
+    (click)="openTodoDialog()"
+  >
+  </kendo-floatingactionbutton>
+</div>
+
+<add-edit-todo-dialog
+  [isOpen]="isTodoDialogOpen"
+  (addTodo)="addTodo($event)"
+  (editTodo)="editTodo($event)"
+  (cancel)="closeTodoDialog()"
+  [value]="selectedTodo$ | async"
+></add-edit-todo-dialog>
+
+<app-todos-table (edit)="handleTableEdit($event)"></app-todos-table>
