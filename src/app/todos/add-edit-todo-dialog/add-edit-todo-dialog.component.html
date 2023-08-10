@@ -1,6 +1,6 @@
 <kendo-dialog
   *ngIf="isOpen"
-  (close)="onCancel()"
+  (close)="handleCancel()"
   [minWidth]="300"
   [width]="400"
 >
@@ -57,14 +57,14 @@
     <kendo-dialog-actions layout="end">
       <button
         kendoButton
-        (click)="onSave()"
+        (click)="handleSave()"
         themeColor="primary"
         [disabled]="!todoForm.valid"
         type="submit"
       >
         Save
       </button>
-      <button kendoButton (click)="onCancel()" type="button">Cancel</button>
+      <button kendoButton (click)="handleCancel()" type="button">Cancel</button>
     </kendo-dialog-actions>
   </form>
 </kendo-dialog>
