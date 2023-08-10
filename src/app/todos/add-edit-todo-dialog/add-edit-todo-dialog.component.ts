@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { NonNullableFormBuilder } from '@angular/forms';
 import { TodoType } from '../models/todo-type.enum';
 import { Todo } from '../models/todo.model';
+import { createTodoFormGroup } from '../utils';
 import { TodoFormFields } from './types';
 
 @Component({
@@ -12,7 +13,6 @@ import { TodoFormFields } from './types';
 export class AddEditTodoDialogComponent {
   @Input() public isOpen = false;
   @Input() public set value(todo: Todo | null) {
-    console.log('todo', todo);
     this.selectedTodo = todo;
     if (todo) {
       this.isNew = false;
@@ -30,12 +30,7 @@ export class AddEditTodoDialogComponent {
   public isNew = true;
   private selectedTodo: Todo | null = null;
 
-  public todoForm = this.fb.group({
-    title: ['', Validators.required],
-    description: [''],
-    type: [TodoType.PERSONAL, Validators.required],
-    completed: [false],
-  });
+  public todoForm = createTodoFormGroup(this.fb);
 
   constructor(private fb: NonNullableFormBuilder) {}
 
@@ -50,6 +45,7 @@ export class AddEditTodoDialogComponent {
 
   public onSave(): void {
     const todo = this.todoForm.getRawValue();
+    this.clearForm();
     if (!this.isNew && this.selectedTodo) {
       this.editTodo.emit({
         ...todo,
@@ -58,6 +54,5 @@ export class AddEditTodoDialogComponent {
     } else {
       this.addTodo.emit(todo);
     }
-    this.clearForm();
   }
 }

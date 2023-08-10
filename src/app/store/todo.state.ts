@@ -1,8 +1,8 @@
+import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { TodoType } from '../todos/models/todo-type.enum';
 import { Todo } from '../todos/models/todo.model';
 import { TodoActions } from './todo.actions';
-import { TodoType } from '../todos/models/todo-type.enum';
-import { Injectable } from '@angular/core';
 
 export interface TodoStateModel {
   todos: Todo[];

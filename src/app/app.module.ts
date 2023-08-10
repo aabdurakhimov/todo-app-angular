@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { NgxsModule } from '@ngxs/store';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgxsModule } from '@ngxs/store';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { TodoState } from './store/todo.state';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TodosModule } from './todos/todos.module';
 
 @NgModule({

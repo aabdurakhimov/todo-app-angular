@@ -7,7 +7,6 @@
     <kendo-formfield>
       <kendo-label [for]="title" text="Title"></kendo-label>
       <input formControlName="title" #title kendoTextBox required />
-
       <kendo-formerror>Error: Title is required</kendo-formerror>
     </kendo-formfield>
 
@@ -38,7 +37,6 @@
         #completed
         kendoCheckBox
         type="checkbox"
-        [disabled]="isNew"
       />
     </kendo-formfield>
 
